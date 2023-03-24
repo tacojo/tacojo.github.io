@@ -23,7 +23,7 @@
 		  -moz-appearance: textfield;
 		}	
 
-		.btn-mine {
+		.btn-update {
 			color: #ffffff;
 			background-color: MediumAquaMarine;
 		} 
@@ -34,16 +34,38 @@
 			background-color: MediumAquaMarine;
 		}		
 
-		.chart_container {
-			display: flex;
+		.linechart_container {
+			display: inline-block;
 			justify-content: center;
 			align-items: center;
 			width: 100%;
+			height: 100%;
 			margin: auto;
 			padding: 20px;
 			background-color: powderblue;
 		}
-		
+		#myChart {
+			display: flex;
+			width:100%;
+  			height:100%;
+		}		
+		.piechart_container {
+			display: inline-block;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			margin: auto;
+			padding: 20px;
+			background-color: powderblue;
+		}			
+		#myPie {
+			display: flex;
+			width: 50%;
+			height: 50%;
+			padding: 20px;
+		}		
+
 		.slidecontainer {
 			width: 100%;
 		}
@@ -84,58 +106,65 @@
 
 		.small-middle-container{
 			margin: auto;
-			width: 70%;
+			width: 80%;
 		}
+	
 	</style>
 </head>
 <body>
 <div  class="small-middle-container">
 	<div class="row">
-		<div class="col-md-12 text-center">
+		<div class="col-lg-12 text-center">
 			<h1 id="page_title"> Monthly Installments Graph</h1>
 		</div>
-	</div>		
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group text-center slidecontainer">
-				<label class="font-weight-bold" for="principal">Principal:</label><br>
-				<button class="btn shadow bg-green rounded" id="principal_plus" onclick="calculate('principal','minus',1000)">-</button>
-				<input type="number" id="principal" style="text-align: center; width: 60%" value="500000" >
-				<button class="btn shadow bg-green rounded" id="principal_minus" onclick="calculate('principal','plus',1000)">+</button><br>
-				<input class="slider" type="range" min="10000" max="1000000" step="10000" id="principalSlider" oninput="updateFieldValue('principal')"><br>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group text-center slidecontainer">
-				<label class="font-weight-bold" for="rate">Rate (%):</label><br>
-				<button class="btn shadow bg-green rounded" id="rate_plus" onclick="calculate('rate','minus', 0.01)">-</button>
-				<input type="number" id="rate" style="text-align: center; width: 60%" value="5">
-				<button class="btn shadow bg-green rounded" id="rate_minus" onclick="calculate('rate','plus', 0.01)">+</button><br>
-				<input class="slider" type="range" min="0.1" max="10" step="0.1" id="rateSlider" oninput="updateFieldValue('rate')"><br>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group text-center slidecontainer">
-				<label class="font-weight-bold" for="duration">Duration (years):</label><br>
-				<button class="btn shadow bg-green rounded" id="duration_plus" onclick="calculate('duration','minus',1)">-</button>
-				<input type="number" id="duration" style="text-align: center; width: 60%" value="15">
-				<button class="btn shadow bg-green rounded" id="duration_minus" onclick="calculate('duration','plus', 1)">+</button><br>
-				<input class="slider" type="range" min="1" max="30" step="1" id="durationSlider" oninput="updateFieldValue('duration')"><br>
-			</div>
-		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 text-center p-2">
-			<button class="btn btn-mine" type="submit" onclick="updateChart()">Update Chart</button>
+		<div class="col-lg-2 text-center">
+			<div class="row">
+				<div class="form-group text-center slidecontainer">
+					<label class="font-weight-bold" for="principal">Principal:</label><br>
+					<button class="btn shadow bg-green rounded" id="principal_plus" onclick="calculate('principal','minus',1000)">-</button>
+					<input type="number" id="principal" style="text-align: center; width: 60%" value="500000" >
+					<button class="btn shadow bg-green rounded" id="principal_minus" onclick="calculate('principal','plus',1000)">+</button><br>
+					<input class="slider" type="range" min="10000" max="1000000" step="10000" id="principalSlider" oninput="updateFieldValue('principal')"><br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group text-center slidecontainer">
+					<label class="font-weight-bold" for="rate">Rate (%):</label><br>
+					<button class="btn shadow bg-green rounded" id="rate_plus" onclick="calculate('rate','minus', 0.01)">-</button>
+					<input type="number" id="rate" style="text-align: center; width: 60%" value="5">
+					<button class="btn shadow bg-green rounded" id="rate_minus" onclick="calculate('rate','plus', 0.01)">+</button><br>
+					<input class="slider" type="range" min="0.1" max="10" step="0.1" id="rateSlider" oninput="updateFieldValue('rate')"><br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group text-center slidecontainer">
+					<label class="font-weight-bold" for="duration">Duration (years):</label><br>
+					<button class="btn shadow bg-green rounded" id="duration_plus" onclick="calculate('duration','minus',1)">-</button>
+					<input type="number" id="duration" style="text-align: center; width: 60%" value="15">
+					<button class="btn shadow bg-green rounded" id="duration_minus" onclick="calculate('duration','plus', 1)">+</button><br>
+					<input class="slider" type="range" min="1" max="30" step="1" id="durationSlider" oninput="updateFieldValue('duration')"><br>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center p-2">
+					<button class="btn btn-update" type="submit" onclick="updateChart()">Update Chart</button>
+				</div>
+			</div>				
 		</div>
-	</div>	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="chart_container width=1000px">
-				<canvas id="myChart" ></canvas>
+		<div class="col-lg-5 text-center">
+			<div class="linechart_container ">
+				<canvas id="myLineChart" ></canvas>
 			</div>	
 		</div>
-	</div>
+		<div class="col-lg-5 text-center">			
+			<div class="piechart_container ">
+				<canvas id="myPieChart"></canvas>
+			</div>	
+			
+		</div>				
+	</div>	
 </div>
 <script>
 	
@@ -171,10 +200,11 @@
 	const durationInput = document.getElementById("duration");
 
 	// Get the canvas element and create the initial chart
-	const canvas = document.getElementById("myChart");
-	const ctx = canvas.getContext("2d");
+	const canvasLineChart = document.getElementById("myLineChart");
+	const ctxLineChart = canvasLineChart.getContext("2d");
 
-	let chartData = {
+	// Line chart /////////////////////////////////////////////
+	let dataLineChart = {
 		labels: [],
 		datasets: [
 		  {
@@ -192,7 +222,7 @@
 		]
 	};
 
-	let chartOptions = {
+	let optionsLineChart = {
 		responsive: true,
 		maintainAspectRatio: true,
 		scales: {
@@ -204,12 +234,38 @@
 		}
 	};
 
-	let myChart = new Chart(ctx, {
+	let myLineChart = new Chart(ctxLineChart, {
 		type: "line",
-		data: chartData,
-		options: chartOptions
+		data: dataLineChart,
+		options: optionsLineChart
 	});
-	
+
+	// Pie chart /////////////////////////////////////////////
+	// Get the canvas element and create the initial chart
+	const canvasPieChart = document.getElementById("myPieChart");
+	const ctxPieChart = canvasPieChart.getContext("2d");
+
+	let dataPieChart = {
+		labels: [],
+		datasets: [
+		  {
+			label: "Ratio",
+			data: []
+		  },			  
+		]
+	};
+
+	let optionsPieChart = {
+		responsive: true,
+		maintainAspectRatio: true,
+	};
+
+	let myPieChart = new Chart(ctxPieChart, {
+		type: "pie",
+		data: dataPieChart,
+		options: optionsPieChart
+	});
+
 	function prepareData() {
 		var principal = document.getElementById('principal').value;
 		var rate = document.getElementById('rate').value;
@@ -222,7 +278,7 @@
 
 		var interestData = [0.0];
 		for (var i = 1; i <= duration; i++) {
-			//calculate balance;
+			// Calculate balance;
 			var interest = balance * monthlyRate;
 			var principalPaid = monthlyPayment - interest;
 			balance = balance - principalPaid;
@@ -241,7 +297,7 @@
 		result["points"] = duration;
 		result["datapoints"] = balanceData;
 		result["interestpoints"] = interestData;
-		result["monthly_payment"] = String( roundx(monthlyPayment,2));
+		result["monthly_payment"] = String(roundx(monthlyPayment,2));
 		return result;
 	}
   
@@ -253,11 +309,17 @@
 		newInterestpoints = results.interestpoints.filter(function(value, index, Arr) {
 			return index % 12 == 0;
 		});		
-		myChart.data.labels =  Array.from({length: (results.points/12)+1}, (_, i) => `Year ${(i+1)-1}`),
-		myChart.data.datasets[0].data = newDatapoints;
-		myChart.data.datasets[1].data = newInterestpoints;
-		myChart.update();
+		myLineChart.data.labels =  Array.from({length: (results.points/12)+1}, (_, i) => `Year ${(i+1)-1}`),
+		myLineChart.data.datasets[0].data = newDatapoints;
+		myLineChart.data.datasets[1].data = newInterestpoints;
+		myLineChart.update();
+
 		document.getElementById("page_title").innerHTML = "Monthly Installments Graph - £"+ results.monthly_payment;
+		
+		myPieChart.data.labels = ['Mortgage value', 'Interest Paid'];
+		myPieChart.data.datasets[0].data = [newDatapoints[0], newInterestpoints.slice(-1)];
+		myPieChart.data.datasets[0].backgroundColor =['green','red'];
+		myPieChart.update();
 	}
 </script>
 </body>
